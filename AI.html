@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Hub - Top Online AI Models Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --nav-bg: rgba(13, 19, 33, 0.92);
+      --card-bg: rgba(23, 32, 54, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(99, 102, 241, 0.6);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-grad: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f59e0b 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 105px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Lights */
+    .ambient-glow-1 {
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(80px);
+      z-index: -1;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      top: 600px;
+      right: 5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.18) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(80px);
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 45px 16px 20px;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .gradient-text {
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* STICKY FULL-SCREEN FIT NAVIGATION */
+    .sticky-nav-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--card-border);
+      padding: 10px 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-pills {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .nav-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 8px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .nav-link-btn:hover, .nav-link-btn.active {
+      background: #6366f1;
+      color: #ffffff;
+      border-color: #6366f1;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.45);
+    }
+
+    /* Responsive: 2x2 grid on mobile screens so all 4 fit with zero horizontal scrolling */
+    @media (max-width: 640px) {
+      .nav-pills {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+      }
+      .nav-link-btn {
+        padding: 8px 6px;
+        font-size: 0.78rem;
+      }
+      h1 { font-size: 1.9rem; }
+    }
+
+    /* Main Content Area */
+    .content-area {
+      max-width: 1240px;
+      margin: 35px auto 70px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+    }
+
+    .section-icon {
+      font-size: 1.4rem;
+    }
+
+    .section-title-wrap h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Parallel AI Card Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 20px;
+    }
+
+    .ai-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent-grad);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .ai-card:hover::before {
+      opacity: 1;
+    }
+
+    .ai-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .ai-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card-title h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-category {
+      font-size: 0.75rem;
+      color: #818cf8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+
+    .badge-web { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-app { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-free { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-paid { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .pricing-details {
+      background: rgba(0, 0, 0, 0.28);
+      border-radius: 8px;
+      padding: 9px 11px;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      border-left: 3px solid #6366f1;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 11px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .card-btn:hover {
+      background: #6366f1;
+      border-color: #6366f1;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .card-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 16px 40px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <header>
+    <div class="hero-badge">AI Intelligence Index</div>
+    <h1>Explore the Top <span class="gradient-text">Online AI Models</span></h1>
+    <p>Categorized by platform availability (Web & App) and pricing tiers (Free & Unlimited Pro) with direct outbound access.</p>
+  </header>
+
+  <div class="sticky-nav-wrapper">
+    <nav class="nav-pills">
+      <a href="#research" class="nav-link-btn active">🔍 Research & Chat</a>
+      <a href="#coding" class="nav-link-btn">💻 Coding & Dev</a>
+      <a href="#creative" class="nav-link-btn">🎨 Art & Video</a>
+      <a href="#audio" class="nav-link-btn">🎙️ Audio & Voice</a>
+    </nav>
+  </div>
+
+  <main class="content-area">
+
+    <section id="research">
+      <div class="section-title-wrap">
+        <span class="section-icon">🔍</span>
+        <h2>Research, Search & General Intelligence</h2>
+      </div>
+      <div class="grid">
+
+        <div class="ai-card" id="chatgpt">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #10a37f, #0d8265)">GPT</div>
+              <div class="card-title">
+                <h3>ChatGPT</h3>
+                <div class="card-category">Conversational AI & Writing</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Mobile / Desktop App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Plus / Pro)</span>
+            </div>
+            <p class="card-desc">Leading general reasoning AI for creative drafting, troubleshooting, logic solving, and productivity automation.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free (GPT-4o mini / limited 4o) • $20/mo Plus for higher limits & advanced tools.</div>
+            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open ChatGPT Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="claude">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #d97706, #b45309)">CL</div>
+              <div class="card-title">
+                <h3>Claude</h3>
+                <div class="card-category">Deep Research & Long Context</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Mobile App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Claude Pro)</span>
+            </div>
+            <p class="card-desc">Superior reasoning model specialized in long document summarization, academic research analysis, and coding synthesis.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free standard tier • $20/mo Claude Pro for 5x capacity & latest Sonnet/Opus models.</div>
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Claude Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="perplexity">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7)">PX</div>
+              <div class="card-title">
+                <h3>Perplexity AI</h3>
+                <div class="card-category">Live Search & Fact Discovery</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Mobile / Mac App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Pro)</span>
+            </div>
+            <p class="card-desc">Conversational search engine that synthesizes live web information with real-time academic citations and web sources.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free daily searches • $20/mo Pro for unlimited multi-model research & file uploads.</div>
+            <a href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Perplexity Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="gemini">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #4f46e5, #7c3aed)">GM</div>
+              <div class="card-title">
+                <h3>Google Gemini</h3>
+                <div class="card-category">Multimodal Intelligence</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Android / iOS App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Advanced)</span>
+            </div>
+            <p class="card-desc">Google's flagship multimodal model designed to parse text, images, video, and audio with massive context windows.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free with Google account • $19.99/mo Gemini Advanced via Google One AI Premium.</div>
+            <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Gemini Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="poe">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9)">PO</div>
+              <div class="card-title">
+                <h3>Poe by Quora</h3>
+                <div class="card-category">All-In-One AI Aggregator</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">iOS / Android / Mac</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Pro)</span>
+            </div>
+            <p class="card-desc">Access multiple leading models (GPT-4o, Claude 3.5, Flux, Mistral) and thousands of user-built bots in one subscription.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free daily computational points • $19.99/mo for full premium model access.</div>
+            <a href="https://poe.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Poe Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="coding">
+      <div class="section-title-wrap">
+        <span class="section-icon">💻</span>
+        <h2>Coding & Software Engineering</h2>
+      </div>
+      <div class="grid">
+
+        <div class="ai-card" id="cursor">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #1e293b, #0f172a)">CR</div>
+              <div class="card-title">
+                <h3>Cursor AI</h3>
+                <div class="card-category">AI-First Code Editor</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-app">Desktop App (Win/Mac/Linux)</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Pro)</span>
+            </div>
+            <p class="card-desc">VS Code fork with deep repository indexing that writes, refactors, and debugs full codebase projects seamlessly.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free tier with base completions • $20/mo Pro for 500 fast premium requests.</div>
+            <a href="https://www.cursor.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Cursor Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="copilot">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #334155, #1e293b)">CP</div>
+              <div class="card-title">
+                <h3>GitHub Copilot</h3>
+                <div class="card-category">IDE Code Autocomplete</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-app">IDE Extensions</span>
+              <span class="badge badge-paid">Paid Only</span>
+            </div>
+            <p class="card-desc">Leading AI pair programmer that provides real-time multi-line autocompletions and unit test generations directly inside your editor.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> 30-day free trial • $10/month ($100/year) for unlimited individual code suggestions.</div>
+            <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open GitHub Copilot</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="phind">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #6366f1, #4338ca)">PH</div>
+              <div class="card-title">
+                <h3>Phind</h3>
+                <div class="card-category">Developer Search Engine</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Pro)</span>
+            </div>
+            <p class="card-desc">An intelligent search engine tailored for software developers, reading live documentation and debugging error stacks.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free high-speed technical search • $20/mo Pro for Claude 3.5 Sonnet / GPT-4o deep mode.</div>
+            <a href="https://www.phind.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Phind Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="creative">
+      <div class="section-title-wrap">
+        <span class="section-icon">🎨</span>
+        <h2>Art, Image & Video Editing</h2>
+      </div>
+      <div class="grid">
+
+        <div class="ai-card" id="midjourney">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #ec4899, #be185d)">MJ</div>
+              <div class="card-title">
+                <h3>Midjourney</h3>
+                <div class="card-category">Image Generation & Concept Art</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Discord App</span>
+              <span class="badge badge-paid">Paid Only</span>
+            </div>
+            <p class="card-desc">Industry-standard text-to-image generator creating photorealistic artwork, product designs, and 3D concept graphics.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Basic plan at $10/mo • $30/mo Standard for unlimited Relax Mode image generations.</div>
+            <a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Midjourney Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="runway">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899)">RW</div>
+              <div class="card-title">
+                <h3>Runway Gen-3</h3>
+                <div class="card-category">Generative AI Video Suite</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">iOS App</span>
+              <span class="badge badge-free">Free Trial</span>
+              <span class="badge badge-paid">Paid (Unlimited)</span>
+            </div>
+            <p class="card-desc">High-definition AI video generator with motion brush tools, keyframe controls, and video-to-video style conversion.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free starter credits • Unlimited Generation plan available at $76/month.</div>
+            <a href="https://runwayml.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Runway Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="canva">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6)">CV</div>
+              <div class="card-title">
+                <h3>Canva Magic Studio</h3>
+                <div class="card-category">Graphic Design & Photo Manipulation</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Mobile / Desktop App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Canva Pro)</span>
+            </div>
+            <p class="card-desc">Comprehensive visual editing platform featuring AI Magic Eraser, background remover, image expansion, and presentations.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free basic graphics tools • Canva Pro at $12.99/mo for unlimited AI Magic assets.</div>
+            <a href="https://www.canva.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Canva Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="descript">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #10b981, #047857)">DS</div>
+              <div class="card-title">
+                <h3>Descript</h3>
+                <div class="card-category">Text-Based Video & Audio Editing</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Desktop App (Win/Mac)</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Creator / Pro)</span>
+            </div>
+            <p class="card-desc">Edit podcast and video recordings like a Word document: remove filler words ("um", "uh"), clone voices, and auto-caption.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free 1 transcription hour/mo • Creator plan at $12/mo for unlimited 4K exports.</div>
+            <a href="https://www.descript.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Descript Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="audio">
+      <div class="section-title-wrap">
+        <span class="section-icon">🎙️</span>
+        <h2>Voice, Audio & Language Translation</h2>
+      </div>
+      <div class="grid">
+
+        <div class="ai-card" id="elevenlabs">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)">EL</div>
+              <div class="card-title">
+                <h3>ElevenLabs</h3>
+                <div class="card-category">Voice Synthesis & Audio Dubbing</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Reader App (iOS/Android)</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Starter/Pro)</span>
+            </div>
+            <p class="card-desc">State-of-the-art text-to-speech with natural emotion, dynamic custom voice cloning, and automatic multi-language video dubbing.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free 10,000 characters/month • Paid tiers from $5/mo with commercial licensing.</div>
+            <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open ElevenLabs Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="suno">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c)">SN</div>
+              <div class="card-title">
+                <h3>Suno AI</h3>
+                <div class="card-category">Music & Song Generation</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">iOS / Android App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (Pro)</span>
+            </div>
+            <p class="card-desc">Compose complete radio-quality songs with full vocals, instrumentation, and lyric styles directly from simple text prompts.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free 50 credits daily (5 songs) • $8/mo Pro for 2,500 credits & commercial rights.</div>
+            <a href="https://suno.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open Suno Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-card" id="deepl">
+          <div>
+            <div class="card-header">
+              <div class="ai-icon" style="background: linear-gradient(135deg, #0f172a, #2563eb)">DL</div>
+              <div class="card-title">
+                <h3>DeepL Translate</h3>
+                <div class="card-category">Neural Language Translation</div>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-web">Web</span>
+              <span class="badge badge-app">Mobile / Desktop App</span>
+              <span class="badge badge-free">Free Tier</span>
+              <span class="badge badge-paid">Paid (DeepL Pro)</span>
+            </div>
+            <p class="card-desc">High-precision neural machine translation that captures professional tone, local nuances, and full document file formats.</p>
+          </div>
+          <div>
+            <div class="pricing-details"><strong>Tier Details:</strong> Free web translation • Pro starting at $8.74/mo with unlimited document translations.</div>
+            <a href="https://www.deepl.com" target="_blank" rel="noopener noreferrer" class="card-btn">
+              <span>Open DeepL Website</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© techaiexperts community • Direct access to top online AI models and platforms.</p>
+  </footer>
+
+  <script>
+    // Active Navigation Highlight on Scroll
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link-btn");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 130;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
